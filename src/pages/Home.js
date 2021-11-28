@@ -11,9 +11,10 @@ import Hero from '../components/hero/Hero'
 import Grid from '../components/grid/Grid'
 import Thumbnail from '../components/thumbnail/Thumbnail'
 import Spinner from '../components/spinner/Spinner'
+import SearchBar from '../components/searchbar/SearchBar'
 
 const Home = () => {
-  const { state, loading, error } = useHomeFetch()
+  const { state, loading, error, setSearchTerm } = useHomeFetch()
 
   return (
     <>
@@ -24,6 +25,7 @@ const Home = () => {
           text={state.results[0].overview}
         />
       ) : null}
+      <SearchBar setSearchTerm={setSearchTerm} />
       <Grid header='Popular Movies'>
         {state.results.map((movie) => (
           <Thumbnail
