@@ -12,9 +12,11 @@ import Grid from '../components/grid/Grid'
 import Thumbnail from '../components/thumbnail/Thumbnail'
 import Spinner from '../components/spinner/Spinner'
 import SearchBar from '../components/searchbar/SearchBar'
+import Button from '../components/button/Button'
 
 const Home = () => {
-  const { state, loading, error, searchTerm, setSearchTerm } = useHomeFetch()
+  const { state, loading, error, searchTerm, setSearchTerm, setMovieLoading } =
+    useHomeFetch()
 
   return (
     <>
@@ -40,7 +42,10 @@ const Home = () => {
           </Thumbnail>
         ))}
       </Grid>
-      <Spinner />
+      {loading && <Spinner />}
+      {state.page < state.total_pages && !loading && (
+        <Button text='Load More' callback={() => setMovieLoading(true)} />
+      )}
     </>
   )
 }
